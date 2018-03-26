@@ -34,9 +34,13 @@
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-standard": "^3.0.1",
     "font-awesome": "^4.7.0",
+    "github-markdown-css": "^2.10.0",
+    "highlight.js": "^9.12.0",
     "less": "^3.0.1",
     "less-loader": "^4.1.0",
     "nodemon": "^1.11.0",
-    "scmp": "^2.0.0"
+    "scmp": "^2.0.0",
+    "simplemde": "^1.11.2",
+    "vue-simplemde": "^0.4.6"
   }
 }
