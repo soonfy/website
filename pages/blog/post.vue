@@ -12,25 +12,19 @@
           <el-tag class="tag" :key="tag" v-for="tag in blog.tags" closable :disable-transitions="false" @close="handleClose(tag)">
             {{tag}}
           </el-tag>
-          <el-input class="add-input" v-if="inputVisible" placeholder="标签" clearable v-model="inputValue" ref="saveTagInput" size="small" @keyup.enter.native="handleInputConfirm" @blur="handleInputConfirm"></el-input>
+          <el-input class="add-input" v-if="inputVisible" placeholder="回车添加标签" v-model="inputValue" ref="saveTagInput" size="small" @keyup.enter.native="handleInputConfirm" @blur="handleInputConfirm"></el-input>
           <el-button v-else class="add-tag" size="small" @click="showInput">+ 标签</el-button>
         </el-col>
       </el-form-item>
 
-      <!-- <textarea ref="editor"></textarea> -->
       <markdown-editor :content="content" preview-class="markdown-body" :highlight="true" :configs="configs" ref="markdownEditor"></markdown-editor>
     </el-form>
   </div>
 </template>
 
 <script>
-// import SimpleMDE from 'simplemde'
-// import markdownEditor from 'vue-simplemde/src/markdown-editor'
-import { markdownEditor } from 'vue-simplemde'; // 导入markdownEditor组件
-// import Vue from 'vue'
-// import VueSimplemde from 'vue-simplemde'
-
-// Vue.use(VueSimplemde)
+import css from 'simplemde/dist/simplemde.min.css'
+import { markdownEditor } from 'vue-simplemde';
 import hljs from 'highlight.js';
 
 window.hljs = hljs;
@@ -47,29 +41,38 @@ export default {
         name: '',
         tags: [],
       },
-      configs: {              // markdown编辑器配置参数
-        status: false,          // 禁用底部状态栏
-        initialValue: 'Hello BBK',      // 设置初始值
+      configs: {
+        status: true,
+        initialValue: '',
+        autoDownloadFontAwesome: false,
+        autofocus: true,
+        autosave: {
+          enabled: true,
+          uniqueId: 'soonfy',
+          delay: 1000 * 10
+        },
+        lineWrapping: true,
+        placeholder: '支持 markdown 语法',
+        spellChecker: false,
+        forceSync: true,
+        indentWithTabs: true,
+        tabSize: 2,
+        toolbarTips: true,
         renderingConfig: {
-          codeSyntaxHighlighting: true,   // 开启代码高亮
-          highlightingTheme: 'atom-one-light' // 自定义代码高亮主题
-        }
+          codeSyntaxHighlighting: true,
+          highlightingTheme: 'atom-one-light'
+        },
+        status: ['autosave', 'lines', 'words', 'cursor', {
+          className: 'keystrokes',
+          defaultValue: function(el) {
+            this.keystrokes = 0
+            el.innerHTML = '0 Keystrokes'
+          },
+          onUpdate: function(el) {
+            el.innerHTML = ++this.keystrokes + ' Keystrokes'
+          }
+        }],
       }
-      // configs: {
-      //   content: '博文',
-      //   element: this.$refs.editor,
-      //   autoDownloadFontAwesome: false,
-      //   autofocus: true,
-      //   autosave: {
-      //     enabled: true,
-      //     uniqueId: 'soonfy',
-      //     delay: 1000 * 10
-      //   },
-      //   lineWrapping: true,
-      //   placeholder: '博文',
-      // },
-
-
     }
   },
   components: {
@@ -124,8 +127,11 @@ el-form {
 }
 
 .add-input {
-  margin: 0 0 0 10px;
   width: 120px;
+}
+
+.tag+.add-input {
+  margin: 0 0 0 10px;
 }
 
 .tag+.add-tag {
