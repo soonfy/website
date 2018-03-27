@@ -7,18 +7,18 @@
         <span>首页</span>
       </el-menu-item>
 
-      <el-submenu index="/blog">
+      <el-submenu index="/blog/">
         <template slot="title"><i class="fa fa-book"></i>博客</template>
-        <el-menu-item index="/blog"><i class="fa fa-list"></i>博客列表</el-menu-item>
-        <el-menu-item index="/blog/post"><i class="fa fa-pencil"></i>写博客</el-menu-item>
+        <el-menu-item index="/blog/"><i class="fa fa-list"></i>博客列表</el-menu-item>
+        <el-menu-item index="/blog/post/"><i class="fa fa-pencil"></i>写博客</el-menu-item>
       </el-submenu>
 
-      <el-menu-item index="/chat">
+      <el-menu-item index="/chat/">
         <i class="fa fa-comments"></i>
         <span>聊天室</span>
       </el-menu-item>
 
-      <el-menu-item index="/show">
+      <el-menu-item index="/show/">
         <i class="fa fa-area-chart"></i>
         <span>数据分析</span>
       </el-menu-item>
@@ -30,8 +30,9 @@
   export default {
     name: 'headerComponent',
     data() {
+      let currentRoute = this.$router.currentRoute.path;
       return {
-        activeIndex: this.$router.currentRoute.path,
+        activeIndex: currentRoute,
       };
     },
     methods: {

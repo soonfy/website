@@ -54,10 +54,11 @@ module.exports = {
         styleLibraryName: 'theme-chalk'
       }]]]
     },
-    vendor: ['element-ui', 'axios']
+    vendor: ['element-ui', 'axios', 'lodash']
   },
   plugins: [
     { src: '~plugins/element-ui', ssr: true },
     { src: '~plugins/font', ssr: true },
+    { src: '~plugins/method', ssr: true },
   ]
 }
