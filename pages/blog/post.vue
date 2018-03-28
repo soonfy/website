@@ -1,5 +1,5 @@
 <template>
-  <div class="blog-container">
+  <div class="post-container">
     <el-form class="blog-form" ref="form" :model="blog" label-width="60px" label-position="left">
       <el-form-item label="标题: ">
         <el-col :span="span">
@@ -53,20 +53,7 @@
         span: 12,
         inputVisible: false,
         inputValue: '',
-        options: [{
-          label: '前端',
-          value: 'frontend'
-        }, {
-          label: '服务端',
-          value: 'server',
-          disabled: true
-        }, {
-          label: '数据分析',
-          value: 'analysis'
-        }, {
-          label: '其它',
-          value: 'other'
-        }],
+        options: this.allTypes,
         blog: {
           title: '',
           tags: [],
@@ -175,7 +162,7 @@
   /* @import '~github-markdown-css';
   @import '~highlight.js/styles/atom-one-dark.css'; */
 
-  .blog-container {
+  .post-container {
     margin: 0 auto;
     padding: 40px 20px;
   }

@@ -1,16 +1,16 @@
 import Koa from 'koa'
 import { Nuxt, Builder } from 'nuxt'
 import * as bodyParser from 'koa-bodyparser'
-import mongoose from 'mongoose';
 
 import * as blog from '../apis/controllers/blog';
-mongoose.connect('mongodb://localhost/website');
+import mongo from '../apis/config/mongo';
 
-async function start () {
+async function start() {
   const app = new Koa()
   const host = process.env.HOST || '127.0.0.1'
   const port = process.env.PORT || 3000
 
+  await mongo();
   app.use(bodyParser());
   app.use(blog.routes());
   app.use(blog.allowedMethods());
