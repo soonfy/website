@@ -28,13 +28,15 @@
       <markdown-editor v-model="blog.content" preview-class="markdown-body" :highlight="true" :configs="configs"></markdown-editor>
 
       <el-form-item label="公开: ">
-        <el-switch v-model="blog.isPublic" inactive-color="#aaa"></el-switch>
+        <el-switch v-model="blog.isPublic" active-color="#006633" inactive-color="#909090"></el-switch>
       </el-form-item>
 
-      <el-button-group>
-        <el-button type="primary" @click="publish"><i class="fa fa-envelope-open-o"></i>发布</el-button>
-        <el-button type="info" plain @click="draft"><i class="fa fa-address-book-o"></i>草稿</el-button>
-      </el-button-group>
+      <div class="publish">
+        <el-button-group>
+          <el-button :loading="buttonLoading" type="success" @click="publish"><i class="fa fa-envelope-open-o"></i>发布</el-button>
+          <el-button :loading="buttonLoading" type="info" plain @click="draft"><i class="fa fa-address-book-o"></i>草稿</el-button>
+        </el-button-group>
+      </div>
 
     </el-form>
   </div>
@@ -44,8 +46,6 @@
   import axios from 'axios';
   import css from 'simplemde/dist/simplemde.min.css'
   import { markdownEditor } from 'vue-simplemde';
-  // import hljs from 'highlight.js';
-  // window.hljs = hljs;
 
   export default {
     data() {
@@ -54,6 +54,7 @@
         inputVisible: false,
         inputValue: '',
         options: this.allTypes,
+        buttonLoading: false,
         blog: {
           title: '',
           tags: [],
@@ -118,6 +119,7 @@
         this.inputValue = '';
       },
       async publish() {
+        this.buttonLoading = true;
         let res = await axios.post('/apis/blog/publish', this.blog);
         if (res.data.status === 'success') {
           this.$message({
@@ -125,7 +127,7 @@
             type: 'success',
           });
           await this.sleep(5);
-          this.$router.push('/blog');
+          this.$router.push('/blog/');
         } else {
           this.$message({
             message: '发布失败',
@@ -134,6 +136,7 @@
         }
       },
       async draft() {
+        this.buttonLoading = true;
         let res = await axios.post('/apis/blog/draft', this.blog);
         if (res.data.status === 'success') {
           this.$message({
@@ -159,8 +162,6 @@
 
 <style scoped lang="less">
   @import '~simplemde/dist/simplemde.min.css';
-  /* @import '~github-markdown-css';
-  @import '~highlight.js/styles/atom-one-dark.css'; */
 
   .post-container {
     margin: 0 auto;
@@ -169,10 +170,10 @@
 
   .blog-form {
     padding: 20px 10px;
-    background: #ddd;
+    background: #f8f8f8;
     border-radius: 10px;
-    border: solid 1px #ccc;
-    box-shadow: 4px 4px 4px #888;
+    border: solid 1px #c0c0c0;
+    box-shadow: 8px 8px 8px #f0f0f0;
   }
 
   .tag+.tag {
@@ -190,5 +191,9 @@
   .tag+.add-tag {
     margin: 0 0 0 10px;
     width: 90px;
+  }
+
+  .publish {
+    text-align: center;
   }
 </style>

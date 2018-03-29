@@ -1,6 +1,6 @@
 <template>
   <header class="container">
-    <el-menu :default-active="activeIndex" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b" mode="horizontal"
+    <el-menu :default-active="activeIndex" background-color="#505050" text-color="#fff" active-text-color="#FFCC00" mode="horizontal"
       @select="selectNav" :router="true">
       <el-menu-item index="/">
         <i class="fa fa-home"></i>
@@ -21,6 +21,11 @@
       <el-menu-item index="/show/">
         <i class="fa fa-area-chart"></i>
         <span>数据分析</span>
+      </el-menu-item>
+
+      <el-menu-item index="/home/">
+        <i class="fa fa-user"></i>
+        <span>个人主页</span>
       </el-menu-item>
     </el-menu>
   </header>

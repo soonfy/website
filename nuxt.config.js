@@ -18,7 +18,8 @@ module.exports = {
   /*
   ** Global CSS
   */
-  css: ['~assets/css/reset.css',
+  css: [
+    '~assets/css/reset.css',
     '~assets/css/main.css',
     'element-ui/lib/theme-chalk/index.css'
   ],

@@ -19,3 +19,46 @@ del,ins,u,s,a,a:hover{text-decoration:none;}
 body,textarea,input,button,select,keygen,legend{font:12px/1.14 arial,\5b8b\4f53;color:#333;outline:0;}
 body{background:#fff;}
 a,a:hover{color:#333;}
+html{box-sizing: content-box;}
+
+/* marked style */
+
+h1 {
+  height: 50px;
+  line-height: 50px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+h2 {
+  height: 40px;
+  line-height: 40px;
+  font-size: 20px;
+  font-weight: bold;
+}
+h3 {
+  height: 30px;
+  line-height: 30px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+strong{
+  font-size: 12px;
+  height: 20px;
+  line-height: 20px;
+}
+
+em{
+  font-style:oblique;
+  font-size: 12px;
+  height: 20px;
+  line-height: 20px;
+}
+
+code{
+  background: #e0e0e0;
+  font-size: 12px;
+  height: 20px;
+  line-height: 20px;
+}

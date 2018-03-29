@@ -36,13 +36,15 @@ router.get('/blogs', async (ctx, next) => {
     console.error(error);
     ctx.body = {
       status: 'error',
-      message: error.name
+      name: error.name,
+      message: error.message,
     }
   }
 });
 
 router.get('/drafts', async (ctx, next) => {
   try {
+    console.log(ctx.request.query);
     let docs = await Blog.find({ status: 1, isPublic: true });
     console.log(docs);
     ctx.body = {
@@ -53,13 +55,15 @@ router.get('/drafts', async (ctx, next) => {
     console.error(error);
     ctx.body = {
       status: 'error',
-      message: error.name
+      name: error.name,
+      message: error.message,
     }
   }
 });
 
 router.get('/types', async (ctx, next) => {
   try {
+    console.log(ctx.request.query);
     let docs = await Blog.distinctType({ status: 0, isPublic: true });
     console.log(docs);
     ctx.body = {
@@ -70,7 +74,45 @@ router.get('/types', async (ctx, next) => {
     console.error(error);
     ctx.body = {
       status: 'error',
-      message: error.name
+      name: error.name,
+      message: error.message,
+    }
+  }
+});
+
+router.get('/blog/detail', async (ctx, next) => {
+  try {
+    console.log(ctx.request.query);
+    let { id } = ctx.request.query;
+    let doc = await Blog.findById(id);
+    console.log(doc);
+    ctx.body = {
+      status: 'success',
+      blog: doc
+    }
+  } catch (error) {
+    console.error(error);
+    ctx.body = {
+      status: 'error',
+      name: error.name,
+      message: error.message,
+    }
+  }
+});
+
+router.get('/blog/marked', async (ctx, next) => {
+  try {
+    console.log(ctx.request.query);
+    let { id } = ctx.request.query;
+    let doc = await Blog.findById(id);
+    console.log(doc);
+    ctx.body = doc.contentMarked;
+  } catch (error) {
+    console.error(error);
+    ctx.body = {
+      status: 'error',
+      name: error.name,
+      message: error.message,
     }
   }
 });
@@ -89,7 +131,8 @@ router.post('/blog/publish', async (ctx, next) => {
     console.error(error);
     ctx.body = {
       status: 'error',
-      message: error.name
+      name: error.name,
+      message: error.message,
     }
   }
 });
@@ -107,7 +150,8 @@ router.post('/blog/draft', async (ctx, next) => {
   } catch (error) {
     ctx.body = {
       status: 'error',
-      message: error.name
+      name: error.name,
+      message: error.message,
     }
   }
 });
