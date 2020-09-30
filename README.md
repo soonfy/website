@@ -1,6 +1,6 @@
 # personal-website
 
-> soonfy personal website
+> soonfy personal websit
 
 ## Build Setup
 
